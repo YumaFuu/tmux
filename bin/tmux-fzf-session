@@ -3,8 +3,9 @@
 if [ -n "$TMUX" ]; then
   session="$(tmux list-sessions |
     grep -v "popup" |
-    fzf |
-    cut -d : -f 1)"
+    cut -d : -f 1 |
+    fzf
+  )"
 
   if [ -n "$session" ]; then
     tmux switch -t $session
