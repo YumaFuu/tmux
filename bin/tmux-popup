@@ -1,0 +1,11 @@
+#!/bin/bash
+
+session=$(tmux display-message -p -F "#{session_name}")
+
+if [[ $session == "popup" ]];then
+  tmux detach -s "popup"
+else
+  tmux popup -d '#{pane_current_path}' \
+    -xC -yC -w"80%" -h"80%" \
+    -E "tmux attach -t 'popup' || tmux new -s popup"
+fi
